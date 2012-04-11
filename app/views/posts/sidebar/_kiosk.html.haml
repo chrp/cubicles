@@ -1,0 +1,38 @@
+/ register new location
+= session['kiosk_registered_city']
+= session['kiosk_registered_country']
+
+- if session['kiosk_registered_city'].nil? || session['kiosk_registered_country'].nil? then
+  %form.comment-form{action: '#', method: :post, entype: "multipart/form-data"}
+    .form
+      %h2 
+        =t :enter_location
+
+      %input.text.has-default-value.required{name: 'register_city', id: 'register_city', type: :text, value: t(:your_city) + "…"}
+      %input.text.has-default-value.required{name: 'register_country', id: 'register_country', type: :text, value: t(:your_country) + "…"}
+      
+      %input.f-submit{type: :submit, value: t(:login)}
+
+- else #if location is registered show form
+  %form.comment-form{action: '#', method: :post, entype: "multipart/form-data"}
+    .form
+      %h2 
+        =t :share_your_thoughts
+
+      %input{type: :hidden, name: 'submit_to_topic_id', id: 'submit_to_topic_id', value: @topic.id}
+      %input{type: :hidden, name: 'submit_post',        id: 'submit_post',        value: 1}
+      %input{type: :hidden, name: 'city',               id: 'city',               value: session['kiosk_registered_city']}
+      %input{type: :hidden, name: 'country',            id: 'country',            value: session['kiosk_registered_country']}
+
+      %textarea.has-default-value.max-400.required{name: 'text', id: 'text', rows: 10, cols: 32} 
+        =t(:your_comment) + "…"
+      %p.max-warning
+        =t(:comment_upto_400_chars)
+
+      %input.text.has-default-value.required{name: 'name', id: 'name', type: :text, value: t(:your_name) + "…"}
+      %input.file{name: 'image', id: 'image', type: :file, title: t(:your_photo) + "…"}
+
+      %input.f-submit{type: :submit, value: t(:publish)}
+
+      %p.mute
+        =t(:publicity_disclaimer, {organization: CFG['organization']})

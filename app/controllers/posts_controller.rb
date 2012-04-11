@@ -4,6 +4,16 @@ class PostsController < InheritedResources::Base
 
   def kiosk_feed #aka "onsite"
     @mode = :kiosk
+
+    #register new location ?
+    if !params['register_city'].nil? && !params['register_country'].nil? then
+       session['kiosk_registered_city'] = params['register_city']
+       session['kiosk_registered_country'] = params['register_country']
+    end
+
+    #post new feed ?
+    if !params['submit_post'].nil? then submit_post(params) end
+
     all_feeds
   end  
 
@@ -14,6 +24,9 @@ class PostsController < InheritedResources::Base
 
   def website_feed
     @mode = :website
+
+    #store user object in session
+
     all_feeds
   end
 
@@ -71,6 +84,20 @@ class PostsController < InheritedResources::Base
     else
       return Topic.last
     end
+  end
+
+  def submit_post values
+    topic = Topic.find(values['submit_to_topic_id'])
+    user = User.create({
+      name: values['name'],
+      city: values['city'],
+      country: values['country']
+      })
+    Post.create({
+      topic: topic,
+      user: user,
+      text: values['text']
+    })
   end
 
   def demo_data(comment_id)

@@ -2,6 +2,7 @@
   #sidebar
     = render "posts/sidebar/logos"
     = render "posts/sidebar/topic"
+    = render "posts/sidebar/#{@mode}"
 
   #feed
     - @posts.each do |p|

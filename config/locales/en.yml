@@ -24,13 +24,14 @@ en:
   entry_subline_feed_html: "#%{id} %{name} in %{city}, %{country} at %{time}" #in use
   entry_subline_mosaic_html: "%{name} in %{city}, %{country}" #in use
 
-  search: "Buscar"
-  search_no_results: "Your search for %keyword% didn't return any results."
-  search_showing_results_for_keyword: "Showing search results for %keyword%"
-  search_showing_results_for_topic: "Showing %htmlBegin%all comments for the selected topic%htmlEnd%"
+  search: "Buscar" # not used
+  search_no_results: "Your search for %keyword% didn't return any results." # not used
+  search_showing_results_for_keyword: "Showing search results for %keyword%" # not used
+  search_showing_results_for_topic: "Showing %htmlBegin%all comments for the selected topic%htmlEnd%" # not used
 
   opinions_disclaimer: "The opinions expressed in this feed are those of the individuals concerned and do not necessarily state or reflect those of %{organization}."
   created_by_hirnstrom: "Cublicles was made by %hirnstromLink%."
+  publicity_disclaimer: "Your comment will be visible here and on the %{organization} homepage"
 
   time:
     formats:

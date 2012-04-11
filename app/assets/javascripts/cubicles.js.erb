@@ -177,7 +177,7 @@ function updateFeed() {
                 // update topic container and hidden fields
                 $('#topic-heading').text(data.topic.heading);
                 $('#topic-text').text(data.topic.text);
-                $('#commentTopicId').val(data.topic.id);
+                $('#submit_to_topic_id').val(data.topic.id);
                 
                 // adjust topic div height to suit content
                 $('#topic-heading-container').animate({"height": $('#topic-heading').outerHeight()}, {
