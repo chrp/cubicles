@@ -1,0 +1,23 @@
+default:
+  version: 0.3
+  title: "cubicles demo"
+  organization: "IICD"
+
+  feed_speed: 300
+  feed_limit: 4
+  feed_interval: 5
+  feed_cache_interval: 10
+
+  mosaic_interval: 15
+  mosaic_text_limit_with_image: 300
+  mosaic_text_limit_without_image: 400
+
+development:
+  feed_demo_mode: true
+  mosaic_interval: 900
+
+test:
+  feed_demo_mode: false
+
+production:
+  feed_demo_mode: false

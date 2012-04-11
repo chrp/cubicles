@@ -1,0 +1,9 @@
+%form.comment-form{action: '#', method: :post, entype: "multipart/form-data"}
+  .form
+    %h2 
+      = translate :enter_your_details
+    %input.text.has-default-value.required{name: 'login_name', id: 'login_name', type: :text, value: translate(:your_name) + "…"}
+    %input.text.has-default-value.required{name: 'login_city', id: 'login_city', type: :text, value: translate(:your_city) + "…"}
+    %input.text.has-default-value.required{name: 'login_country', id: 'login_country', type: :text, value: translate(:your_country) + "…"}
+    %input.file.has-default-value.required{name: 'login_image_file', id: 'login_image_file', type: :file, value: translate(:your_photo) + "…"}
+    %input.f-submit{type: :submit, value: translate(:login)}

@@ -1,0 +1,321 @@
+html,
+body#f {
+   margin:          0;
+   padding:         0;
+   height:          100%;
+}
+#f #container {
+   min-height:      100%;
+   position:        relative;
+}
+#f #content { 
+    width:          960px;
+    margin:         0 auto;
+    overflow:       hidden;
+    zoom:           1;
+    padding:        20px 0 140px 0;
+}
+#m h1 {
+    position:       absolute;
+    top:            20px;
+    right:          20px;
+    left:           20px;
+    bottom:         153px;
+    overflow:       hidden;
+}
+#m h2 {
+    position:       absolute;
+    top:            166px;
+    right:          20px;
+    left:           20px;
+    bottom:         14px;
+    overflow:       hidden;
+}
+
+#f #sidebar { 
+    width:          292px;
+    float:          left;
+    margin:         0 16px 0 0;
+}
+#f #sidebar #logos { 
+    padding:        0 0 14px 23px;
+}
+#f #sidebar #logos img { 
+    margin:         0 10px 0 0;
+}
+#f #sidebar #topic-heading-container { 
+    padding:        33px 26px 22px 23px;
+}
+#f #sidebar #topic-text-container { 
+    padding:        13px 26px 33px 23px;
+    /*height:         0px;*/
+    overflow:       hidden;
+}
+#f #sidebar .topic-select {
+    padding:        8px 0 4px 0;
+}
+
+
+#f #sidebar .form {
+    margin:         20px 0 10px 6px;
+    overflow:       hidden;
+    zoom:           1;
+}
+#f #sidebar .search {
+    margin:         7px 0 14px 0;
+}
+#f #sidebar h2 { 
+    clear:          both;
+}
+
+#f .form textarea,
+#f .form input.text,
+#f .form .fileinputs,
+#f .form .f-submit {
+    margin:         10px 0 0 0;
+}
+#f .search input.text {
+    padding:        4px;
+    width:          170px;
+}
+#f .form textarea {
+    width:          250px;
+    height:         198px;
+    padding:        15px;
+}
+#f .form input.text {
+    width:          250px;
+    height:         30px;
+    padding:        8px 15px 0 15px;
+}
+#f .form .fileinputs {
+    position:       relative;
+    width:          280px;
+    height:         40px;
+}
+#f .form .fakefile {
+    position:       absolute;
+    top:            0px;
+    left:           0px;
+    z-index:        1;
+    width:          280px;
+}
+#f .form .fakefile input {
+    position:       absolute;
+    top:            8px;
+    left:           15px;
+    z-index:        2;
+    width:          165px;
+}
+#f .form input.file {
+    position:       relative;
+    text-align:     right;
+    z-index:        3;
+    height:         38px;
+    width:          280px;
+}
+#f .fakefile-overlay {
+    display:        block;
+    float:          left;
+    height:         38px;
+    padding:        0 0 0 200px;
+    width:          80px;
+}
+#f .form .f-submit {
+    display:        block;
+    float:          left;
+    height:         38px;
+    width:          120px;
+}
+#f .form .mute {
+    float:          left;
+    width:          150px;
+    margin:         17px 0 0 10px;
+}
+#f .form .max-warning {
+    margin:         3px 0 0 10px;
+}
+#f .form .error-warning {
+    margin:         0 16px 4px 10px;
+    padding:        3px;
+}
+#f .search-form .error-warning {
+    padding:        4px;
+}
+
+
+#f #feed { 
+    width:          652px;
+    float:          left;
+    overflow:       hidden;
+    zoom:           1;
+}
+#m #mosaic { 
+    overflow:       hidden;
+    zoom:           1;
+    margin:         0 auto;
+}
+#f #feed .comment {
+    height:         222px;
+    position:       relative;
+    margin:         0 0 8px 0;
+}
+#m #mosaic .comment {
+    height:         230px;
+    width:          310px;
+    position:       relative;
+    float:          left;
+    margin:         0 10px 10px 0;
+    visibility:     hidden;
+}
+#f #feed .quote-mark {
+    float:          left;
+    margin:         0 5px 4px 0;
+}
+#m #mosaic .placeholder {
+    float:          left;
+}
+#f #feed .new-topic .comment-heading {
+    position:       absolute;
+    height:         50px;
+    width:          600px;
+    top:            30px;
+    left:           27px;
+}
+#f #feed .image-left .comment-text {
+    position:       absolute;
+    height:         160px;
+    width:          470px;
+    top:            20px;
+    left:           158px;
+}
+#f #feed .image-right .comment-text {
+    position:       absolute;
+    height:         160px;
+    width:          470px;
+    top:            20px;
+    right:          155px;
+}
+#f #feed .image-none .comment-text {
+    position:       absolute;
+    height:         160px;
+    width:          600px;
+    top:            20px;
+    left:           27px;
+}
+#f #feed .new-topic .comment-text {
+    position:       absolute;
+    height:         110px;
+    width:          600px;
+    top:            90px;
+    left:           27px;
+}
+#m #mosaic #topic-text {
+    position:       absolute;
+    top:            80px;
+    right:          20px;
+    left:           20px;
+    bottom:         20px;
+    overflow:       hidden;
+}
+#m #mosaic .comment-text {
+    position:       absolute;
+    top:            20px;
+    right:          20px;
+    left:           20px;
+    bottom:         34px;
+    overflow:       hidden;
+}
+#f #feed .image-left .comment-meta {
+    position:       absolute;
+    width:          470px;
+    top:            180px;
+    left:           158px;
+}
+#f #feed .image-right .comment-meta {
+    position:       absolute;
+    width:          470px;
+    top:            180px;
+    right:          155px;
+}
+#f #feed .image-none .comment-meta {
+    position:       absolute;
+    width:          600px;
+    top:            180px;
+    left:           27px;
+}
+#m #mosaic .comment-meta {
+    position:       absolute;
+    right:          20px;
+    left:           20px;
+    bottom:         14px;
+    height:         20px;
+}
+#f #feed .image-left .image-container {
+    position:       absolute;
+    top:            26px;
+    left:           6px;
+    width:          133px;
+    height:         190px;
+}
+#f #feed .image-right .image-container {
+    position:       absolute;
+    top:            26px;
+    right:          6px;
+    width:          133px;
+    height:         190px;
+}
+#m #mosaic .image-left .image-container {
+    position:       absolute;
+    top:            6px;
+    left:           6px;
+    width:          99px;
+    height:         144px;
+}
+#m #mosaic .visible {
+    visibility:     visible;
+}
+#m #mosaic .hidden {
+    display:        none;
+}
+
+#f .button {
+    display:        block;
+    float:          left;
+    height:         32px;
+    margin:         0 0 0 20px;
+}
+#f #sidebar .button {
+    margin:         10px 0 0 0;
+}
+#f .button span{
+    display:        block;
+    line-height:    32px;
+    margin:         0 0 0 20px;
+    padding:        0 20px 0 0;
+}
+
+
+#f #footer {
+    clear:          both;
+    position:       absolute;
+    bottom:         0;
+    width:          100%;
+    height:         100px;
+}
+#f #footer-content { 
+    width:          960px;
+    margin:         20px auto;
+    overflow:       hidden;
+    zoom:           1;
+}
+#f #disclaimer { 
+    width:          292px;
+    float:          left;
+    margin:         0 16px 0 0;
+}
+#f #pagination-text {
+    padding:        6px 0 0 0;
+    margin:         0 0 0 20px;
+    float:          left;
+}

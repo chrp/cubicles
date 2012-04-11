@@ -1,0 +1,86 @@
+body#f,
+textarea,
+input {
+    font:           normal 1em/1.25em Calibri, Arial, Verdana, Helvetica, sans-serif;
+}
+body#m {
+    font:           normal 0.825em/1.25em Calibri, Arial, Verdana, Helvetica, sans-serif;
+}
+#f h1,
+#m h1,
+#m h2 {
+    font-size:      1.7em;
+    font-weight:    bold;
+    line-height:    1.07em;
+}
+#f h2 {
+    font-size:      1.375em;
+    font-weight:    bold;
+    line-height:    1.07em;
+}
+#f h3,
+#f h3 a {
+    font-size:      1.1em;
+    line-height:    1.07em;
+    text-decoration:none
+}
+#f .selected h3 {
+    font-weight:    bold;
+}
+#f #sidebar .topic-select .time {
+    font-size:      0.875em;
+}
+
+#f .fakefile-overlay,
+#f .form .f-submit {
+    font-weight:    bold;
+    text-decoration:none;
+    line-height:    38px;
+    text-align:     center;
+}
+
+
+#f .comment-meta,
+#m .comment-meta {
+    font-size:      0.875em;
+}
+#f .comment-author,
+#m .comment-author {
+    font-size:      1.15em;
+}
+#f .comment-medium,
+#m .comment-medium {
+    font-size:      1.5em;
+    line-height:    1.17em;
+}
+#f .comment-short,
+#m .comment-short {
+    font-size:      1.875em;
+    line-height:    1.07em;
+}
+#f .comment-heading {
+    font-size:      1.7em;
+    line-height:    1em;
+    font-weight:    bold;
+    text-align:     center;
+}
+
+#f .button {
+    font-weight:    bold;
+    text-decoration:none;
+}
+
+
+#f #disclaimer,
+#f .mute,
+#f .max-warning,
+#f .error-warning { 
+    font-size:      0.6875em;
+    line-height:    1.07em;
+}
+#f #pagination-text { 
+    font-size:      1.125em;
+}
+#f .pagination-count {
+    font-weight:    bold;
+}

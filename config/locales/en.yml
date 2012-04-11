@@ -1,0 +1,37 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  back: "Back"
+  topic: "Topic"
+  author: "Author"
+  your_name: "Your name"
+  your_city: "Your city"
+  your_country: "Your country"
+  your_photo:  "Your photo"
+  login: "Login"
+  enter_location: "Please enter your location"
+  share_your_thoughts_username: "Share your thoughts with us, %userName%!"
+  share_your_thoughts: "Share your thoughts with us!"
+  comment_upto_400_chars: "Your comment can be up to 400 characters long"
+  your_comment: "Your comment"
+  enter_your_details: "Please enter your details"
+  publish: "Publish"
+
+  show_complete_listing: "Show the complete listing"
+  show_complete_feed: "Show complete feed archive" # in use
+  showing_only_last_comments_html: "Showing only the last <span class=\"pagination-count\">%{limit} comments</span>" #in use
+  entry_subline_feed_html: "#%{id} %{name} in %{city}, %{country} at %{time}" #in use
+  entry_subline_mosaic_html: "%{name} in %{city}, %{country}" #in use
+
+  search: "Buscar"
+  search_no_results: "Your search for %keyword% didn't return any results."
+  search_showing_results_for_keyword: "Showing search results for %keyword%"
+  search_showing_results_for_topic: "Showing %htmlBegin%all comments for the selected topic%htmlEnd%"
+
+  opinions_disclaimer: "The opinions expressed in this feed are those of the individuals concerned and do not necessarily state or reflect those of %{organization}."
+  created_by_hirnstrom: "Cublicles was made by %hirnstromLink%."
+
+  time:
+    formats:
+      short_date: "%d %b %Y" 

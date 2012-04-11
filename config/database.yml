@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: cubicles
+  pool: 5
+  username: cubicles
+  password: cubicles
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: cubicles-test
+  pool: 5
+  username: cubicles
+  password: cubicles
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: cubicles-test
+  pool: 5
+  username: cubicles
+  password: cubicles

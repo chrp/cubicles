@@ -1,0 +1,448 @@
+///////////////////////////////////////
+//
+// firebug console output
+//
+//////////////////////////////////////
+function debug(text) {
+    if (window.console && window.console.log) {
+        window.console.log(text);
+    }
+}
+
+
+///////////////////////////////////////
+//
+// font size adjust (for Systems w/o Calibri)
+//
+//////////////////////////////////////
+adjustBaseFontSize = function(treshold) {
+    
+    // get height of test area
+    // depending on the installed font
+    var testArea = $('<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas lobortis posuere nibh. Etiam lectus dui, mattis quis, tristique at, tristique eu, nisl. Fusce est mauris, faucibus sed, tincidunt sodales, ullamcorper sed, velit. Morbi vehicula. Sed purus mi, tristique eu, sollicitudin eget, bibendum eu, eros. Donec eleifend suscipit elit. Pellentesque metus tortor, lobortis et, pulvinar at, adipiscing non, tortor. Sed ante lorem, auctor a, iaculis non, cursus vitae, nisl. Nulla laoreet volutpat.</div>');
+    var cssObj = {
+        'width'     : '200px',
+        'clear'     : 'both'
+    };
+    testArea.css(cssObj);
+    $('body').append(testArea);
+    
+    var testHeight = testArea.height();
+    var targetFontSize = parseInt($('body').css('font-size'), 10);
+    var targetLineHeight = parseInt($('body').css('line-height'), 10);
+    var ratio = targetLineHeight / targetFontSize;
+    var i = 0;
+
+    
+    // The height shouldn't run above the treshold height or the base font size has to be reduced    
+    while(testHeight > treshold && i < 10) { // 10 is a limiting factor
+    
+        i++;
+        targetFontSize --;
+        targetLineHeight = targetFontSize * ratio;
+        cssObj = {
+            'font-size'     : targetFontSize + 'px',
+            'line-height'   : targetLineHeight + 'px'
+        };
+        $('body').css(cssObj);
+        testHeight = testArea.height();
+    }
+    testArea.remove();
+};
+
+
+///////////////////////////////////////
+//
+// mask file inputs with nice style
+//
+//////////////////////////////////////
+jQuery.fn.maskFileInput = function() {
+
+    $(this).each(function(i){
+    
+        var defaultValue = $(this).attr('title') ? $(this).attr('title') : '';
+    
+        // add additional HTML
+        $(this).wrap('<div class="fileinputs" />');
+        $(this).after('<div class="fakefile"><input value="' + defaultValue + '" /><a class="fakefile-overlay">Select</a></div>');
+        
+        // hide it
+        $(this).css('opacity',0);
+        
+        // add hover events for button state change
+        $(this).hover(
+            function(){
+                $('a.fakefile-overlay').toggleClass('hover');
+            },
+            function(){
+                $('a.fakefile-overlay').toggleClass('hover');
+            }
+        );
+        
+        // update fake input field with selected file string or default value
+        $(this).mouseout(
+            function(){
+                if($(this).val() !== '') {
+                    $('.fakefile input').val($(this).val());
+                }
+                else {
+                    $('.fakefile input').val(defaultValue);
+                }
+            }
+        );
+    });
+};
+
+
+///////////////////////////////////////
+//
+// toggle default field value
+//
+//////////////////////////////////////
+jQuery.fn.toggleDefaultValue = function() {
+    $(this).each(function(i){
+        
+        // the default value
+        var val = $(this).val();
+        if(val) {
+            
+            // strore it in elements data storage
+            $(this).data('default',val);
+            
+            // prevent value caching in ff (non-xhtml-compliant) 
+            $(this).attr('autocomplete','off');
+            
+            // add focus and blur behaviour
+            $(this).focus(function(){
+                if($(this).val() === $(this).data('default')) {
+                    $(this).val('');
+                }
+            });
+            $(this).blur(function(){
+                if($(this).val() === '') {
+                    $(this).val($(this).data('default'));
+                }
+            });
+        }
+    });
+};
+
+///////////////////////////////////////
+//
+// check if field is filled with it default value
+//
+//////////////////////////////////////
+jQuery.fn.isDefaultValue = function(){
+    
+    if( $(this).data('default') === $(this).val() ) {
+        return true;
+    }
+    else {  
+        return false;
+    }
+};
+
+
+///////////////////////////////////////
+//
+// update and animate feed
+//
+//////////////////////////////////////
+function updateFeed() {
+    
+    var feed       = $('#feed');    // element holding feed
+    
+    // get current IDs
+    var curTopic   = feed.data('topic') >= 0 ? feed.data('topic') : startTopic;
+    var curComment = feed.data('comment') >= 0 ? feed.data('comment') : startComment;
+    
+    // AJAX call
+    $.getJSON(updateUrl + '?topic=' + curTopic + '&comment=' + curComment, function(data){
+        
+        // if AJAX call was successfull, schedule the next one
+        //----------------------------------------------------------------------
+        var victim, height;
+        
+        // if there's a new element
+        if(data && data.comment && data.topic) {
+            
+             // check if a new topic starts
+             //-----------------------------------------------------------------
+            if( !curTopic || curTopic < data.topic.id) {
+            
+                //update topic id storage
+                feed.data('topic', data.topic.id);
+                debug('New topic found');
+                
+                // update topic container and hidden fields
+                $('#topic-heading').text(data.topic.heading);
+                $('#topic-text').text(data.topic.text);
+                $('#commentTopicId').val(data.topic.id);
+                
+                // adjust topic div height to suit content
+                $('#topic-heading-container').animate({"height": $('#topic-heading').outerHeight()}, {
+                    queue:      false,
+                    duration:   speed
+                });
+                $('#topic-text-container').animate({"height": $('#topic-text').outerHeight()}, {
+                    queue:      false,
+                    duration:   speed
+                });
+                
+                // create HTML
+                //--------------------------------------------------------------
+                var newTopic =    $('<div class="comment new-topic" />');
+                
+                newTopic.append(  '   <div class="quote-container">' +
+                                    '       <h3 class="comment-heading">' +
+                                            data.topic.heading +
+                                    '       </h3>' +
+                                    '       <p class="comment-text">' +
+                                                data.topic.text +
+                                    '       </p>' +
+                                    '   </div>');
+                
+                // find a victim to kill (all the items in the feed have to die, sorry...)         
+                victim = feed.find('div.comment').length > 0 ? feed.find('div.comment') : false;
+                
+                // if there are victims, fade them out and fade new topic in
+                if(victim) {
+                    height = victim.eq(0).height();
+                    
+                    // fade out all the victims
+                    victim.animate({ opacity : 0}, speed, function () {
+                        
+                        // insert new topic with 0 height           
+                         var insert = newTopic.css({
+                            height : 0,
+                            opacity : 0,
+                            display : 'none'
+                        }).prependTo(feed);
+                         
+                         // increase height of new topic
+                         insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
+                        
+                        // at the same time, decrease the height of the all the victims
+                         $(this).animate({ height : 0 }, speed, function () {
+                            
+                            // and kill them
+                            $(this).remove();
+                         });
+                    });
+                }
+                // if the feed is yet empty
+                else {
+                    // insert new topic and fade it in         
+                    newTopic.css({opacity : 0}).prependTo(feed).animate({ opacity : 1 }, speed);
+                }
+            }
+            
+            // check if theres a new comment
+            //------------------------------------------------------------------
+            else if( !curComment || curComment < data.comment.id) {
+            
+                //update comment id storage
+                feed.data('comment', data.comment.id);
+                debug('New comment found');
+                
+                var commentClass;
+                var textLengthClass;
+                
+                commentClass = data.comment.imageSwitch;
+                
+                // calculate string length and set class
+                if(data.comment.text) {
+                    var textLength = data.comment.text.length;
+                    
+                    if(textLength < 180) {
+                        textLengthClass = 'comment-short';
+                    }
+                    else if(textLength < 220) {
+                        textLengthClass = 'comment-medium';
+                    }
+                    else {
+                        textLengthClass = 'comment-long';
+                    }
+                    
+                }
+                
+                // create HTML
+                //--------------------------------------------------------------
+                var newComment =    $('<div class="comment image-' + commentClass + '" />');
+                
+                newComment.append(  '   <div class="quote-container">' +
+                                    
+                                    '       <p class="comment-text ' + textLengthClass + '">' +
+                                    '           <img class="quote-mark" alt="" src="assets/gfx/quote-feed.png" />' +
+                                                data.comment.text +
+                                    '       </p>' +
+                                    '       <p class="comment-meta">' + 
+                                    '           <span class="comment-count">#' + data.comment.id + '</span> ' +
+                                    '           <span class="comment-author">' + data.comment.name + '</span> in ' +
+                                    '           <span class="comment-city">' + data.comment.city + '</span>, ' +
+                                    '           <span class="comment-country">' + data.comment.country + '</span> at ' + data.comment.time +
+                                    '       </p>' +
+                                    '   </div>');
+                                  
+                        
+                // if there's an image, add it in
+                if(data.comment.pictureFileName) {
+                    newComment.append(  '   <div class="image-container">' +
+                                        '       <img alt="" src="assets/gfx/comment-image-' + commentClass + '-feed.png" style="background-image: url(' + data.comment.feedImageUrl + ');" />' +
+                                        '   </div>');
+                }
+                
+                
+                // find a victim to kill (the last item in the feed has to die, sorry...)         
+                var items  = feed.find('div.comment').length;
+                victim = items > 0 ? feed.find('div.comment:last-child') : false;
+                
+                // if there is a victim, fade it out and fade new comment in
+                if(victim) {
+                    height = victim.height();   
+                    
+                    // if the feed is full to the limit, kill last one and slide new comment in
+                    if(items >= limit) {
+                        // fade the LAST item out
+                        victim.animate({ opacity : 0}, speed, function () {
+                            
+                            // increase the height of the NEW first item             
+                             var $insert = newComment.css({
+                                height : 0,
+                                opacity : 0,
+                                display : 'none'
+                            }).prependTo(feed);
+                             
+                             $insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
+                            
+                            // AND at the same time - decrease the height of the LAST item
+                             $(this).animate({ height : 0 }, speed, function () {
+                                
+                                // finally fade the first item in (and we can remove the last)
+                                $(this).remove();
+                             });
+                        });
+                    }
+                    // if there are comments in the feed but the limit is not reached, slide new comment in at the top 
+                    else {
+                        // increase the height of the NEW first item             
+                        var $insert = newComment.css({
+                            height : 0,
+                            opacity : 0,
+                            display : 'none'
+                        }).prependTo(feed);
+                         
+                         $insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
+                    }
+                }
+                // if the comment is the first oine in the feed, just fade it in
+                else {       
+                    newComment.css({opacity : 0}).prependTo(feed).animate({ opacity : 1 }, speed);
+                }
+            }
+            else {
+                debug('No new data in JSON object found');
+            }
+        }
+        else {
+            debug('No recognized JSON object found');
+        }
+    });
+}
+
+
+///////////////////////////////////////
+//
+// Mosaic calculations
+//
+//////////////////////////////////////
+function scaleAndCenterMosaic() {
+    
+    $('.user-comment').removeClass('hidden');
+    $('.comment').removeClass('visible');
+    var amount = $('.comment').length - 2;
+    
+    // get viewport and item dims
+    var wHeight = $(window).height();
+    var wWidth  = $(window).width();
+    var cWidth  = $('.comment').outerWidth(true);
+    var cHeight = $('.comment').outerHeight(true);
+    
+    // calculate Width and items per row
+    var cInRow = parseInt( (wWidth / cWidth), 10);
+    var mWidth = cInRow * cWidth;
+    var vMargins = (wWidth - mWidth) / 2;
+    
+    // calculate height and items per column based on width
+    var cInCol = parseInt( (wHeight / cHeight), 10);
+    var amountToDisplay = cInCol * cInRow;
+    var mHeight = cInCol * cHeight;
+    var hMargins = (wHeight - mHeight) / 2;
+    
+    // hide
+    $('.user-comment:gt(' + (amountToDisplay - 3) + ')').addClass('hidden');
+    
+    // adjust CSS
+    if(vMargins > 0) {
+        $('#mosaic').css('width', mWidth + 'px');
+    }
+    if(hMargins > 0) {
+        $('#mosaic').css({
+            'padding-top'    : hMargins + 'px'
+        });
+    }
+    $('.comment').addClass('visible');
+    /*
+    debug('mHeight: ' + mHeight);
+    debug('wHeight: ' + wHeight);
+    debug('cHeight: ' + cHeight);
+    debug('hMargins: ' + hMargins);
+    debug('vMargins: ' + vMargins);
+    debug('amountToDisplay: ' + amountToDisplay);*/
+}
+
+/*
+ *
+ * Textarea Maxlength Setter JQuery Plugin
+ * Version 1.0
+ *
+ * Copyright (c) 2008 Viral Patel
+ * website : http://viralpatel.net/blogs
+ *
+ * Dual licensed under the MIT and GPL licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ * http://www.gnu.org/licenses/gpl.html
+ *
+*/
+jQuery.fn.maxlength = function(max){
+    
+    var warning = $(this).next('.max-warning');
+    
+    $(this).keypress(function(event){
+        var key = event.which;
+        
+        //all keys including return.
+        if(key >= 33 || key == 13 || key == 8 || key == 17) {
+            
+            var length = $(this).val().length + 1;
+            
+            //update warning
+            warning.text( (max - length ) + '/' + max + ' characters remaining');
+        
+            if(length >= max && key != 8) {
+                
+                //stop taking input
+                event.preventDefault();
+                
+                // cut off string
+                $(this).val($(this).val().slice(0,max));
+                
+                warning.stop().animate({
+                    color :  '#ed7603'
+                }, 100).animate({
+                    color :  '#ffffff'
+                }, 100);
+            }
+        }
+    });
+};

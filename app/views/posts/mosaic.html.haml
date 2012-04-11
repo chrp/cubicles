@@ -1,0 +1,31 @@
+#container
+  #content
+    #mosaic
+      .comment.new-topic
+        %h1
+          = @topic.heading
+        %div
+          %p#topic-text
+            = @topic.description
+
+      - @posts.each do |p|
+        .comment.user-comment{class: p.image_class}
+          .quote-container
+            %p.comment-text{class: p.text_length_class}
+              - if p.has_image? then 
+                = image_tag 'comment-image-placeholder-mosaic.png', class: placeholder, alt: ''
+              = image_tag 'quote-feed.png', class: 'quote-mark', alt: ''
+              = p.text
+            %p.comment-meta
+              =t 'entry_subline_mosaic_html', p.subline_replacements_html_safe
+          - if p.has_image? then
+            .image-container
+              = image_tag 'comment-image-mosaic.png', style: "background-image: url(#{p.image_class}", alt: ''
+
+  = javascript_include_tag "application" 
+  :javascript
+    var interval = #{CFG['mosaic_interval']} 
+  = javascript_include_tag "cubicles" 
+  = javascript_include_tag "mosaic" 
+  
+  

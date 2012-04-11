@@ -1,0 +1,200 @@
+body {
+    background:     #467391;
+    color:          #333;
+}
+#f h2 {
+    color:          #fafafa;
+}
+#m h2 {
+    color:          #6e90a6;
+}
+#f .selected h3 {
+    color:          #ed7603;
+}
+
+
+#f #sidebar #topic-heading-container { 
+    background:     #ed7603 url(bg-topic-head-feed.png) no-repeat;
+}
+#f #sidebar #topic-text-container { 
+    background:     #e3eaee url(bg-topic-body-feed.png) no-repeat left bottom;
+}
+#f #sidebar .topic-select {
+    border-bottom:  1px solid #c7d2db;
+}
+#f #sidebar .topic-select .time {
+    color:          #467391;
+}
+#f #sidebar #topic h2 {
+    color:          #333;
+}
+#f h3 a,
+#f #disclaimer a {
+    color:          #00284a;
+}
+#f h3 a:hover,
+#f #disclaimer a:hover  {
+    color:          #ed7603;
+}
+
+
+#f .form textarea,
+#f .form input,
+#f .mute,
+#f .max-warning {
+    border:         0px;
+    color:          #fff;
+}
+#f .search input.text {
+    border:         1px solid #91abbc;
+}
+#f .form .error-warning {
+    background:     #ed7603;
+    color:          #fff;
+    -moz-border-radius: 0 0 4px 4px;
+    -khtml-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+#f .search-form .error-warning {
+    background:     #ed7603;
+    color:          #fff;
+    -moz-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+#f .form textarea {
+    background:     #1c425c url(form-textarea-feed.png) no-repeat;
+}
+#f .form input.text {
+    background:     #1c425c url(form-input-feed.png) no-repeat;
+}
+#f .form .fakefile input {
+    background:     transparent;
+}
+#f .fakefile-overlay {
+    background:     url(form-file-feed.png) no-repeat left top;
+    color:          #fff;
+}
+#f .fakefile-overlay.hover {
+    background-position: left -38px !important;
+    color:          #bcd6e8;
+}
+#f .fakefile-overlay.active {
+    background:     url(form-file-feed.png) no-repeat left -76px;
+    color:          #fff;
+}
+#f .form .f-submit {
+    background:     url(form-submit-feed.png) no-repeat left top;
+    color:          #ed7603;
+    cursor:         pointer;
+}
+#f .form .f-submit:hover {
+    background-position: left -38px !important;
+    color:          #bcd6e8;
+}
+#f .form .f-submit:active {
+    background-position: left -76px !important;
+    color:          #fff;
+}
+a,
+input {
+   outline: none;
+}
+
+
+#f #feed .image-left {
+    background:     #e3eaee url(bg-comment-image-left.png) no-repeat;
+}
+#f #feed .image-right {
+    background:     #e3eaee url(bg-comment-image-right.png) no-repeat;
+}
+#f #feed .image-none {
+    background:     #e3eaee url(bg-comment-no-image.png) no-repeat;
+}
+#f #feed .new-topic {
+    background:     #e3eaee url(bg-comment-new-topic.png) no-repeat;
+}
+
+
+#m #mosaic .comment {
+    background:     #e3eaee url(bg-comment-mosaic.png) no-repeat;
+}
+#m #mosaic .new-topic {
+    background:     #e3eaee url(bg-topic-mosaic.png) no-repeat;
+}
+#m #mosaic .logos {
+    background:     #e3eaee url(bg-logos-mosaic.png) no-repeat;
+}
+
+
+#f #feed .comment-meta,
+#m #mosaic .comment-meta {
+    color:          #848c91;
+}
+#f #feed .comment-count {
+    color:          #333;
+}
+#f #feed .comment-author,
+#m #mosaic .comment-author,
+#f .comment-meta a {
+    color:          #ed7603;
+}
+#f #feed .comment-city,
+#f #feed .comment-country,
+#m #mosaic .comment-city,
+#m #mosaic  .comment-country {
+    color:          #467391;
+}
+#f .comment-meta a:hover {
+    text-decoration:none;
+}
+#f #feed .comment-medium,
+#m #mosaic .comment-medium {
+    color:          #444;
+}
+#f #feed .comment-short,
+#m #mosaic .comment-short {
+    color:          #555;
+}
+
+
+#f .button {
+    background:     url(bg-button-feed.png) no-repeat left top;
+    color:          #fff;
+}
+#f .button span {
+    background:     url(bg-button-feed.png) no-repeat right top;
+}
+#f #sidebar .button {
+    background:     url(bg-button-sidebar.png) no-repeat left top;
+    color:          #fff;
+}
+#f #sidebar .button span {
+    background:     url(bg-button-sidebar.png) no-repeat right top;
+}
+#f .button:hover {
+    background-position: left -32px !important;
+    color:          #fce9d6;
+}
+#f .button:hover span {
+    background-position: right -32px !important;
+}
+#f .button:active {
+    background-position: left -64px !important;
+    color:          #944b03;
+}
+#f .button:active span {
+    background-position: right -64px !important;
+}
+
+
+#footer {
+    border-top:     1px solid #83a0b3;
+    background:     #6d90a6;
+    color:          #e3eaee;
+}
+#f .pagination-count {
+    color:          #1c425c;
+}
