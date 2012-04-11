@@ -29,7 +29,8 @@ class PostsController < InheritedResources::Base
     data = Hash.new
 
     if(CFG['feed_demo_mode']) then
-      data = demo_data(Integer(params['comment'])+1)
+      #data = demo_data(Integer(params['comment'])+1)
+      data = demo_data(100)
     else
       data['topic'] = Topic.next(params['topic'])
       data['comment'] = Post.next(params['comment'])
@@ -84,9 +85,10 @@ class PostsController < InheritedResources::Base
         name: "Christoph Schüßler",
         city: 'Berlin',
         country: 'Germany',
-        time: '14:25 CET',
+        time: I18n.localize(Time.now),
         text: 'Lorem ipsum dolor sit amet',
-        image: false
+        image: false,
+        imageClass: 'image-none'
       }
     }
 

@@ -248,7 +248,7 @@ function updateFeed() {
                 var commentClass;
                 var textLengthClass;
                 
-                commentClass = data.comment.imageSwitch;
+                commentClass = data.comment.imageClass;
                 
                 // calculate string length and set class
                 if(data.comment.text) {
@@ -268,16 +268,16 @@ function updateFeed() {
                 
                 // create HTML
                 //--------------------------------------------------------------
-                var newComment =    $('<div class="comment image-' + commentClass + '" />');
+                var newComment =    $('<div class="comment ' + commentClass + '" />');
                 
                 newComment.append(  '   <div class="quote-container">' +
                                     
                                     '       <p class="comment-text ' + textLengthClass + '">' +
-                                    '           <img class="quote-mark" alt="" src="assets/gfx/quote-feed.png" />' +
+                                    '           <img class="quote-mark" alt="" src="<%= asset_path("quote-feed.png") %>" />' +
                                                 data.comment.text +
                                     '       </p>' +
                                     '       <p class="comment-meta">' + 
-                                    '           <span class="comment-count">#' + data.comment.id + '</span> ' +
+                                    '           <span class="comment-id">#' + data.comment.id + '</span> ' +
                                     '           <span class="comment-author">' + data.comment.name + '</span> in ' +
                                     '           <span class="comment-city">' + data.comment.city + '</span>, ' +
                                     '           <span class="comment-country">' + data.comment.country + '</span> at ' + data.comment.time +
@@ -288,7 +288,7 @@ function updateFeed() {
                 // if there's an image, add it in
                 if(data.comment.pictureFileName) {
                     newComment.append(  '   <div class="image-container">' +
-                                        '       <img alt="" src="assets/gfx/comment-image-' + commentClass + '-feed.png" style="background-image: url(' + data.comment.feedImageUrl + ');" />' +
+                                        '       <img alt="" src="<%= asset_path("comment-image") %>-' + commentClass + '-feed.png" style="background-image: url(' + data.comment.feedImageUrl + ');" />' +
                                         '   </div>');
                 }
                 
@@ -313,6 +313,7 @@ function updateFeed() {
                                 display : 'none'
                             }).prependTo(feed);
                              
+                             newComment.show();
                              $insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
                             
                             // AND at the same time - decrease the height of the LAST item
@@ -329,14 +330,16 @@ function updateFeed() {
                         var $insert = newComment.css({
                             height : 0,
                             opacity : 0,
-                            display : 'none'
+                            display : 'hidden'
                         }).prependTo(feed);
-                         
-                         $insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
+                        
+                        newComment.show();
+                        $insert.animate({ height : height }, speed).animate({ opacity : 1 }, speed);
                     }
                 }
                 // if the comment is the first oine in the feed, just fade it in
                 else {       
+                    newComment.show();
                     newComment.css({opacity : 0}).prependTo(feed).animate({ opacity : 1 }, speed);
                 }
             }

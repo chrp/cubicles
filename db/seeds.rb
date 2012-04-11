@@ -41,7 +41,7 @@ end
 
 end
 
-admin = User.create! do |u|
+admin = AdminUser.create! do |u|
   u.email = 'admin@example.com'
   u.password = 'password'
   u.password_confirmation = 'password'
